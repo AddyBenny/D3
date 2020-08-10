@@ -4,9 +4,9 @@ var svgHeight = 550;
 
 var margin = {
     top: 20,
-    right: 40,
-    bottom: 80,
-    left: 100
+    right: 30,
+    bottom: 70,
+    left: 80
 };
 
 // create an SVG wrapper and append the SVG group that will hold the chart,
@@ -24,8 +24,6 @@ var svg = d3
 // append an svg group   
 var plotGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-
 
 
 d3.csv('data.csv').then(function(metaData) {
