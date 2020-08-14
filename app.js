@@ -94,9 +94,4 @@ d3.csv('data.csv').then(function(metaData) {
 
 
 });
-
-
-
-// var xScale = d3.scaleLinear()
-// .domain([0, (metaData.length) / 2])
-// .range([0, width]);
+//  done
