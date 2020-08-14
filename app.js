@@ -31,15 +31,15 @@ d3.csv('data.csv').then(function(metaData) {
 
     metaData.forEach(function(data) {
         data.poverty = +data.poverty;
-        data.smokes = +data.smokes;
+        data.healthcare = +data.healthcare;
     });
 
     var xScale = d3.scaleLinear()
-        .domain([0, (metaData.length) / 2])
+        .domain([d3.min(metaData, d => d.poverty) * .9, d3.max(metaData, d => d.poverty) * 1.1])
         .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(metaData, d => d.smokes) + 5])
+        .domain([d3.min(metaData, d => d.healthcare) * .9, d3.max(metaData, d => d.healthcare) * 1.1])
         .range([height, 0]);
 
 
@@ -64,7 +64,7 @@ d3.csv('data.csv').then(function(metaData) {
         .enter()
         .append("circle")
         .attr("cx", function(d) { return xScale(d.poverty); })
-        .attr("cy", function(d) { return yLinearScale(d.smokes); })
+        .attr("cy", function(d) { return yLinearScale(d.healthcare); })
         .attr("r", 10)
         .attr("opacity", ".7")
         .attr("fill", "green")
@@ -80,13 +80,13 @@ d3.csv('data.csv').then(function(metaData) {
         .attr('y', -50)
         .attr("transform", "rotate(-90)")
         .attr("font-weight", 500)
-        .text('Smokes (%)');
+        .text('Lacks Healthcare (%)');
 
     var circleElements = plotGroup.selectAll(null).data(metaData).enter().append("text");
 
     circleElements
         .attr("x", function(d) { return xScale(d.poverty); })
-        .attr("y", function(d) { return yLinearScale(d.smokes); })
+        .attr("y", function(d) { return yLinearScale(d.healthcare); })
         .text(function(d) { return d.abbr; })
         .attr("font-size", "9px")
         .attr("text-anchor", "middle")
@@ -94,3 +94,9 @@ d3.csv('data.csv').then(function(metaData) {
 
 
 });
+
+
+
+// var xScale = d3.scaleLinear()
+// .domain([0, (metaData.length) / 2])
+// .range([0, width]);
